@@ -1,0 +1,15 @@
+<ion-list *ngIf="films.length > 0">
+  <ion-item *ngFor="let film of films">
+    <ion-thumbnail slot="start">
+      <img
+        *ngIf="film.Poster !== 'N/A'"
+        [src]="film.Poster"
+        alt="film image"
+      />
+    </ion-thumbnail>
+    <ion-label>
+      <h2>{{film.Title}}</h2>
+      <p>{{film.Year}}</p>
+    </ion-label>
+  </ion-item>
+</ion-list>

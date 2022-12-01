@@ -1,20 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title> Film searcher </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Film searcher</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-searchbar
+      [(ngModel)]="query"
+      id="searchbar"
+      placeholder="Search for a movie"
+      (ionChange)="update($event)"
+    ></ion-searchbar>
+    <ion-segment value="movies" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="movies">
+        <ion-label>Movies</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="series">
+        <ion-label>Series</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+    <app-films-list [films]="filmItems"></app-films-list>
+    <!-- <ion-list *ngIf="filmItems.length > 0">
+      <ion-item *ngFor="let film of filmItems">
+        <ion-thumbnail slot="start">
+          <img
+            *ngIf="film.Poster !== 'N/A'"
+            [src]="film.Poster"
+            alt="film image"
+          />
+        </ion-thumbnail>
+        <ion-label>
+          <h2>{{film.Title}}</h2>
+          <p>{{film.Year}}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list> -->
+    <div style="marginTop: 2rem;">
+      <ion-label *ngIf="filmItems.length === 0">Search for a movie</ion-label>
+    </div>
   </div>
 </ion-content>
